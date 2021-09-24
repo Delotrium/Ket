@@ -1,10 +1,20 @@
 import discord
 from discord.ext import commands
+import os
 
-client = commands.Bot(command_prefix= ">")
+client = commands.Bot(command_prefix='tb!')
 
-@client.event 
-async def on_ready():
-    print("The Playground Discord Bot is online!")
+@client.command()
+async def load(ctx, extension):
+    client.load_extension(f"src.{extension}")
 
-client.run("ODEyODI2NjMyMTU4NTc2NjQw.YDGZyg.QjX-VfCMVFWAJXPWyabgU-_rMSw")
+@client.command()
+async def unload(ctx, extension):
+    client.unload_extension(f"src.{extension}")
+
+for filename in os.listdir('DiscordBot\src'):
+    if filename.endswith('.py'):
+        client.load_extension(f"src.{filename[:-3]}")
+
+
+client.run("<token>")

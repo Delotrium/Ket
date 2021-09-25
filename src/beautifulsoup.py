@@ -19,6 +19,18 @@ class Soup(commands.Cog):
         except:
             await ctx.send(f"{ctx.author.mention}:\n We could not find \"{query}\" on the urban dictionary!")
 
+    @commands.command(aliases=["def", 'meaning', 'mean'])
+    async def define(self, ctx, *, query):
+        url = f"https://www.dictionary.com/browse/{query}"
+        
+        result=requests.get(url)
+        doc = BeautifulSoup(result.text, "html.parser")
+        class_parse = "css-10ul8x e1q3nk1v2"
+        try:
+            article = doc.find('div', class_=class_parse).text
+            await ctx.send(f"{ctx.author.mention}, The definition of {query} in the dictionary is:\n{article}")
+        except:
+            await ctx.send(f"{ctx.author.mention}:\n We could not find \"{query}\" in the dictionary!")
 
 
 def setup(client):

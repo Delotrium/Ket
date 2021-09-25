@@ -1,2 +1,2 @@
-# The-Playground-Discord-Bot
-This is a general community discord bot for The Playground server ( https://discord.gg/BTacKkMMRZ )- more details soon!
+# The Ket Discord Bot
+This is a general discord bot that I am creating- more details soon!

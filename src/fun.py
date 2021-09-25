@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import random
-
+import praw
 
 class Fun(commands.Cog):
     def __init__(self, client):
@@ -51,13 +51,22 @@ class Fun(commands.Cog):
         await ctx.send(f"{ctx.author.mention}, there is a {random.randint(1, 100)}% chance that {query}!")
 
     @commands.command()
-    async def guessnumber(self, ctx):
-        computer = random.randint(1, 10)
+    async def guessnumber(self, ctx, *, setting):
+
+        if setting == "easy":
+            computer = random.randint(1,5)
+        elif setting =="normal":
+            computer = random.randint(1, 10)        
+        elif setting == "hard":
+            computer = random.randint(1, 20)
+        elif setting == "impossible" or "ultra hard" or "harder" or "difficult":
+            computer = random.randint(1,35)
+        
         await ctx.send(f'{ctx.author.mention} Guess my number!')
         i=0
         while i < 3:
             def check(msg):
-                return msg.author == ctx.author and msg.channel == ctx.channel and int(msg.content) in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                return msg.author == ctx.author and msg.channel == ctx.channel and int(msg.content) in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
             msg = await self.client.wait_for("message", check=check)
             if int(msg.content) == computer:
                 await ctx.send(f"{ctx.author.mention} is correct!")
@@ -65,8 +74,7 @@ class Fun(commands.Cog):
                 await ctx.send(f"{ctx.author.mention} that is incorrect! You have {2-i} tries left! ")
                 i += 1
             elif i == 2:
-                await ctx.send(f"Damn {ctx.author.mention}, you are that bad..?")
-
+                await ctx.send(f"Damn {ctx.author.mention}, you are that bad..? (The answer was {computer}.)")
 
 
 def setup(client):

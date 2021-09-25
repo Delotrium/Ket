@@ -46,5 +46,9 @@ class Fun(commands.Cog):
                    f'{ctx.author.mention} chose kick! It was highly effective! {member.mention} is now half HP!']
         await ctx.send(replies[random.randint(0, 9)])
 
+    @commands.command()
+    async def chance(self, ctx, *, query):
+        await ctx.send(f"{ctx.author.mention}, there is a {random.randint(1, 100)}% chance that {query}!")
+
 def setup(client):
     client.add_cog(Fun(client))

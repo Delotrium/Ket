@@ -16,7 +16,7 @@ class Soup(commands.Cog):
         try:
             article = doc.find('div', class_="meaning").text
             await ctx.send(f"{ctx.author.mention}, The definition of {query} on the urban dictionary is:\n{article}")
-        except:
+        except (TypeError, AttributeError):
             await ctx.send(f"{ctx.author.mention}:\n We could not find \"{query}\" on the urban dictionary!")
 
     @commands.command(aliases=["def", 'meaning', 'mean'])
@@ -29,7 +29,7 @@ class Soup(commands.Cog):
         try:
             article = doc.find('div', class_=class_parse).text
             await ctx.send(f"{ctx.author.mention}, The definition of {query} in the dictionary is:\n{article}")
-        except:
+        except (TypeError, AttributeError):
             await ctx.send(f"{ctx.author.mention}:\n We could not find \"{query}\" in the dictionary!")
 
 
